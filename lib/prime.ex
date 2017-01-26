@@ -1,5 +1,4 @@
 defmodule Prime do
-  import Math
   @moduledoc """
   Documentation for Prime.
   """
