@@ -23,6 +23,12 @@ defmodule Fib do
         17711
         iex> Fib.fib(25)
         75025
+        iex> Fib.fib(30)
+        832040
+        iex> Fib.fib(40)
+        102334155
+        iex> Fib.fib(45)
+        1134903170
 """
     def fib(1) do 1 end
     def fib(2) do 1 end
@@ -30,8 +36,39 @@ defmodule Fib do
       raise ArgumentError, :message = "#{n} is not a valid fibonnaci number"
     end
     def fib(n) do
-      minus_one = Task.async(Fib, :fib, [n-1])
-      minus_two = Task.async(Fib, :fib, [n-2])
+      fib(n-1) + fib(n-2)
+    end
+    
+@doc """
+    Find the nth Fibonnaci number, this implementation will crash and burn on 30+.  So it is effectivley garbage.
+    This is caused by the Task.async calls.  It quickly has spawned too many processes for the system to handle.
+    Te list implementation below is vastly superior.
+    ## Examples
+        iex> Fib.task_fib(1)
+        1
+        iex> Fib.task_fib(2)
+        1
+        iex> Fib.task_fib(3)
+        2
+        iex> Fib.task_fib(4)
+        3
+        iex> Fib.task_fib(10)
+        55
+        iex> Fib.task_fib(20)
+        6765
+        iex> Fib.task_fib(22)
+        17711
+        iex> Fib.task_fib(25)
+        75025
+"""
+    def task_fib(1) do 1 end
+    def task_fib(2) do 1 end
+    def task_fib(n) when n < 3 do
+      raise ArgumentError, :message = "#{n} is not a valid fibonnaci number"
+    end
+    def task_fib(n) do
+      minus_one = Task.async(Fib, :task_fib, [n-1])
+      minus_two = Task.async(Fib, :task_fib, [n-2])
       Task.await(minus_one) + Task.await(minus_two)
     end
 
