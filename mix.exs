@@ -29,7 +29,8 @@ defmodule Sieve.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-        {:math, "~> 0.3.0"}
+        {:math, "~> 0.3.0"},
+        {:benchee, ">=0.0.0"}
     ]
   end
 end

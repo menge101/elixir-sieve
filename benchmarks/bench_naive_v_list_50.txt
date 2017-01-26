@@ -1,0 +1,8 @@
+##### With input 50 #####
+Name               ips        average  deviation         median
+fib_list      943.67 K      0.00000 m   ±214.33%      0.00000 m
+fib          0.00000 K         6.62 m     ±0.00%         6.62 m
+
+Comparison:
+fib_list      943.67 K
+fib          0.00000 K - 374996501.57x slower
