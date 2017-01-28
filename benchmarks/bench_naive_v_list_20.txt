@@ -1,0 +1,24 @@
+Erlang/OTP 19 [erts-8.2] [source-fbd2db2] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
+Elixir 1.4.0
+Benchmark suite executing with the following configuration:
+warmup: 2.0s
+time: 5.0s
+parallel: 1
+inputs: 20
+Estimated total run time: 14.0s
+
+
+Benchmarking with input 20:
+Benchmarking fib...
+Benchmarking fib_list...
+Warning: The function you are trying to benchmark is super fast, making measures more unreliable! See: https://github.com/PragTob/benchee/wiki/Benchee-Warnings#fast-execution-warning
+
+
+##### With input 20 #####
+Name               ips        average  deviation         median
+fib_list        2.20 M        0.45 μs   ±773.21%        0.40 μs
+fib          0.00516 M      193.96 μs    ±16.88%      177.00 μs
+
+Comparison: 
+fib_list        2.20 M
+fib          0.00516 M - 426.78x slower
