@@ -1,0 +1,66 @@
+Compiling 1 file (.ex)
+Erlang/OTP 19 [erts-8.2] [source-fbd2db2] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
+Elixir 1.4.0
+Benchmark suite executing with the following configuration:
+warmup: 2.0s
+time: 5.0s
+parallel: 1
+inputs: 100, 1000, 10000, 100000
+Estimated total run time: 56.0s
+
+
+Benchmarking with input 100:
+Benchmarking fib_limited_list...
+Warning: The function you are trying to benchmark is super fast, making measures more unreliable! See: https://github.com/PragTob/benchee/wiki/Benchee-Warnings#fast-execution-warning
+
+Benchmarking fib_list...
+Warning: The function you are trying to benchmark is super fast, making measures more unreliable! See: https://github.com/PragTob/benchee/wiki/Benchee-Warnings#fast-execution-warning
+
+
+Benchmarking with input 1000:
+Benchmarking fib_limited_list...
+Benchmarking fib_list...
+
+Benchmarking with input 10000:
+Benchmarking fib_limited_list...
+Benchmarking fib_list...
+
+Benchmarking with input 100000:
+Benchmarking fib_limited_list...
+Benchmarking fib_list...
+
+##### With input 100 #####
+Name                       ips        average  deviation         median
+fib_list              472.43 K        2.12 μs    ±81.55%        2.00 μs
+fib_limited_list      431.73 K        2.32 μs    ±36.93%        2.20 μs
+
+Comparison: 
+fib_list              472.43 K
+fib_limited_list      431.73 K - 1.09x slower
+
+##### With input 1000 #####
+Name                       ips        average  deviation         median
+fib_limited_list       23.36 K       42.80 μs    ±24.16%       40.00 μs
+fib_list               21.94 K       45.57 μs    ±33.26%       42.00 μs
+
+Comparison: 
+fib_limited_list       23.36 K
+fib_list               21.94 K - 1.06x slower
+
+##### With input 10000 #####
+Name                       ips        average  deviation         median
+fib_list                661.50        1.51 ms    ±16.09%        1.43 ms
+fib_limited_list        544.35        1.84 ms    ±12.57%        1.75 ms
+
+Comparison: 
+fib_list                661.50
+fib_limited_list        544.35 - 1.22x slower
+
+##### With input 100000 #####
+Name                       ips        average  deviation         median
+fib_limited_list          7.14      139.99 ms     ±4.81%      139.90 ms
+fib_list                  4.19      238.60 ms   ±100.54%      162.75 ms
+
+Comparison: 
+fib_limited_list          7.14
+fib_list                  4.19 - 1.70x slower

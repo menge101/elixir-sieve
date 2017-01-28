@@ -161,37 +161,4 @@ defmodule Fib do
             [minus_one + minus_two, minus_one]
         end
     end
-
-    defmodule Memoized do
-    @moduledoc """
-    Attempting to implement a solution that uses memoization.
-    """
-        @doc """
-            This should be a properly implemented Y combinator... should be...
-        """
-        def y(fun) do
-            (fn f ->
-                f.(f)
-            end).(
-            fn g ->
-                fun.(fn z ->
-                    (g.(g)).(z)
-                    end)
-            end
-        )
-        end
-
-        @doc """
-            And this might be a proper fibonacci combinator...
-        """
-        def combi_fib(f) do
-            fn(x) ->
-                if x <= 2 do
-                    1
-                else
-                    f.(x-1) + f.(x-2)
-                end
-            end
-        end
-    end
 end
