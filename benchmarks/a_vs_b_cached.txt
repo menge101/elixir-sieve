@@ -1,0 +1,54 @@
+Erlang/OTP 19 [erts-8.2] [source-fbd2db2] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
+Elixir 1.4.0
+Benchmark suite executing with the following configuration:
+warmup: 2.0s
+time: 5.0s
+parallel: 1
+inputs: 10000, 20000, 30000
+Estimated total run time: 42.0s
+
+
+Benchmarking with input 10000:
+Benchmarking original...
+Benchmarking flipped...
+
+Benchmarking with input 20000:
+Benchmarking original...
+Benchmarking flipped...
+
+Benchmarking with input 30000:
+Benchmarking original...
+Benchmarking flipped...
+
+##### With input 10000 #####
+Name           ips        average  deviation         median
+original      87.01       11.49 ms    ±10.11%       11.21 ms
+flipped       86.98       11.50 ms     ±8.37%       11.27 ms
+
+Comparison: 
+original      87.01
+flipped       86.98 - 1.00x slower
+
+##### With input 20000 #####
+Name           ips        average  deviation         median
+flipped       25.40       39.36 ms     ±5.82%       39.00 ms
+original      25.20       39.68 ms     ±5.18%       39.30 ms
+
+Comparison: 
+flipped       25.40
+original      25.20 - 1.01x slower
+
+##### With input 30000 #####
+Name           ips        average  deviation         median
+original      13.44       74.38 ms     ±5.29%       73.84 ms
+flipped       13.10       76.36 ms     ±3.90%       76.13 ms
+
+Comparison: 
+original      13.44
+flipped       13.10 - 1.03x slower
+
+
+original is reliably, slightly faster
+
+original does n-1 + n-2
+flipped  does n-2 + n-1

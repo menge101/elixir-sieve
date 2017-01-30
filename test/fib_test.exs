@@ -34,4 +34,13 @@ defmodule FibTest do
         assert true == true
       end
     end
+
+    defmodule CachedETSTest do
+      use ExUnit.Case
+      doctest Fib.CachedETS
+
+      test "truth" do
+        assert true == true
+      end
+    end
 end

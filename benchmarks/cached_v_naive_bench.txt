@@ -1,0 +1,25 @@
+Erlang/OTP 19 [erts-8.2] [source-fbd2db2] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
+Elixir 1.4.0
+Benchmark suite executing with the following configuration:
+warmup: 2.0s
+time: 5.0s
+parallel: 1
+inputs: 30
+Estimated total run time: 21.0s
+
+
+Benchmarking with input 30:
+Benchmarking a...
+Benchmarking b...
+Benchmarking naive...
+
+##### With input 30 #####
+Name            ips        average  deviation         median
+a           65.43 K       15.28 μs    ±58.21%       14.00 μs
+b           61.93 K       16.15 μs   ±165.70%       14.00 μs
+naive      0.0411 K    24359.51 μs     ±8.78%    23779.50 μs
+
+Comparison: 
+a           65.43 K
+b           61.93 K - 1.06x slower
+naive      0.0411 K - 1593.78x slower

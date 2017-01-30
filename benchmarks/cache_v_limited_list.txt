@@ -1,0 +1,50 @@
+Erlang/OTP 19 [erts-8.2] [source-fbd2db2] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
+Elixir 1.4.0
+Benchmark suite executing with the following configuration:
+warmup: 2.0s
+time: 5.0s
+parallel: 1
+inputs: 1 Mill, 100k, 10k
+Estimated total run time: 42.0s
+
+
+Benchmarking with input 1 Mill:
+Benchmarking cache...
+Benchmarking limited_list...
+
+Benchmarking with input 100k:
+Benchmarking cache...
+Benchmarking limited_list...
+
+Benchmarking with input 10k:
+Benchmarking cache...
+Benchmarking limited_list...
+
+##### With input 1 Mill #####
+Name                   ips        average  deviation         median
+limited_list        0.0721         0.23 m     ±0.00%         0.23 m
+cache              0.00266         6.26 m     ±0.00%         6.26 m
+
+Comparison:
+limited_list        0.0721
+cache              0.00266 - 27.11x slower
+
+##### With input 100k #####
+Name                   ips        average  deviation         median
+limited_list          7.52      132.94 ms     ±3.69%      132.56 ms
+cache                 1.64      609.56 ms     ±6.53%      584.59 ms
+
+Comparison:
+limited_list          7.52
+cache                 1.64 - 4.59x slower
+
+##### With input 10k #####
+Name                   ips        average  deviation         median
+limited_list        547.17        1.83 ms    ±16.71%        1.71 ms
+cache                84.84       11.79 ms     ±6.47%       11.59 ms
+
+Comparison:
+limited_list        547.17
+cache                84.84 - 6.45x slower
+
+Note: The regular list implementation runs my laptop out of memory when trying for the 1 million test.

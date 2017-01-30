@@ -22,8 +22,6 @@ defmodule Fib do
             3
             iex> Fib.Naive.fib(10)
             55
-            iex> Fib.Naive.fib(20)
-            6765
         """
         def fib(1) do 1 end
         def fib(2) do 1 end
@@ -54,10 +52,6 @@ defmodule Fib do
             3
             iex> Fib.Tasked.fib(10)
             55
-            iex> Fib.Tasked.fib(20)
-            6765
-            iex> Fib.Tasked.fib(25)
-            75025
         """
         def fib(1) do 1 end
         def fib(2) do 1 end
@@ -73,7 +67,8 @@ defmodule Fib do
 
     defmodule List do
     @moduledoc """
-    Implementation using linked lists.
+    Implementation using linked lists.  This creates an unbounded linked list, with no memory usage protection.
+    It will eventually run a system out of memory.
     """
         @doc """
         Find the nth Fibonacci number, with a list based implementation.
@@ -91,14 +86,6 @@ defmodule Fib do
             55
             iex> Fib.List.fib(20)
             6765
-            iex> Fib.List.fib(22)
-            17711
-            iex> Fib.List.fib(25)
-            75025
-            iex> Fib.List.fib(30)
-            832040
-            iex> Fib.List.fib(50)
-            12586269025
         """
         def fib(n) do
             [head | _] = list_fib(n)
@@ -137,14 +124,6 @@ defmodule Fib do
             55
             iex> Fib.LimitedList.fib(20)
             6765
-            iex> Fib.LimitedList.fib(22)
-            17711
-            iex> Fib.LimitedList.fib(25)
-            75025
-            iex> Fib.LimitedList.fib(30)
-            832040
-            iex> Fib.LimitedList.fib(50)
-            12586269025
         """
         def fib(n) do
             [head | _] = list_fib(n)
@@ -159,6 +138,51 @@ defmodule Fib do
         def list_fib(n) do
             [minus_one | [minus_two | _]] = list_fib(n-1)
             [minus_one + minus_two, minus_one]
+        end
+    end
+
+    defmodule CachedETS do
+    @moduledoc """
+        This implementation uses ETS to store the calculations of a given value of fib()
+    """
+        @doc """
+        Finding the fibonacci sequence using an ETS cache.
+        ## Examples
+            iex> Fib.CachedETS.fib(1)
+            1
+            iex> Fib.CachedETS.fib(2)
+            1
+            iex> Fib.CachedETS.fib(3)
+            2
+            iex> Fib.CachedETS.fib(4)
+            3
+            iex> Fib.CachedETS.fib(10)
+            55
+        """
+        def fib(n) do
+            cache = :ets.new(:fibs, [:set, :public])
+            result = cached_fib(n, cache)
+            :ets.delete(cache)
+            result
+        end
+
+        def cached_fib(1, _) do
+          1
+        end
+        def cached_fib(2, _) do
+          1
+        end
+        def cached_fib(n, cache_id) do
+            case :ets.lookup(cache_id, n) do
+              [] -> calc_store_return(n, cache_id)
+              [{_, result}] -> result
+            end
+        end
+
+        def calc_store_return(n, cache_id) do
+          result = cached_fib(n-1, cache_id) + cached_fib(n-2, cache_id)
+          :ets.insert(cache_id, {n, result})
+          result
         end
     end
 end
